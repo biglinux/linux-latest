@@ -1,9 +1,9 @@
 # Maintainer: Barnabé di Kartola <barnabedikartola@gmail.com>
 
 pkgname=biglinux-latest
-pkgver=0.0.0
-kernelver=0
-pkgrel=0
+pkgver=6.1.7
+kernelver=61
+pkgrel=1
 pkgdesc="Latest Kernel Version for BigLinux"
 arch=('any')
 url="https://github.com/biglinux/$pkgname"
