@@ -9,7 +9,8 @@ arch=('any')
 url="https://github.com/biglinux/$pkgname"
 license=('GPL3')
 depends=("linux${kernelver}" "linux${kernelver}-headers")
-provides=(linux-latest-headers)
+provides=('linux-latest-headers')
+replaces=('linux60')
 source=("git+${url}.git")
 md5sums=('SKIP')
 if [ -e "${pkgname}.install" ];then
