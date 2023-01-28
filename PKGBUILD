@@ -4,7 +4,6 @@ pkgname=linux-latest
 pkgver=6.1.7
 kernelver=61
 pkgrel=2
-epoch=1
 pkgdesc="Latest Kernel Version for BigLinux"
 arch=('any')
 url="https://github.com/biglinux/$pkgname"

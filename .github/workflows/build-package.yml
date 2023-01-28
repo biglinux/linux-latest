@@ -141,7 +141,7 @@ jobs:
           
           sed -i "s/pkgver=.*/pkgver=${pkgver}/" PKGBUILD
           sed -i "s/kernelver=.*/kernelver=${kernelver}/" PKGBUILD
-          #sed -i "s/pkgrel=.*/pkgrel=${pkgrel}/" PKGBUILD
+          sed -i "s/pkgrel=.*/pkgrel=${pkgrel}/" PKGBUILD
 
       ## Tmate ##
       #- name: Setup tmate session
