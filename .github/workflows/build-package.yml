@@ -136,21 +136,31 @@ jobs:
         shell: bash
         run: |
           pkgverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1)
+          pkgverfinal=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1 | rev | cut -d "." -f1 | rev)
           kernelverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f2 | sed 's/linux//')
           pkgrelRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f2)
           kVerRepo=${pkgverRepo}-${pkgrelRepo}
+          
+          cancel () {
+            echo "Sem atualiza de versão"
+            echo "SAINDO...."
+            curl -H "Authorization: token ${{ secrets.WEBHOOK_TOKEN }}" \
+            -X POST "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
+          }
           
           source PKGBUILD
           kVerBig=${pkgver}-${pkgrel}
           
           if [ "$kVerRepo" != "$kVerBig" ];then
-            sed -i "s/pkgver=.*/pkgver=${pkgverRepo}/" PKGBUILD
-            sed -i "s/kernelver=.*/kernelver=${kernelverRepo}/" PKGBUILD
-            sed -i "s/pkgrel=.*/pkgrel=${pkgrelRepo}/" PKGBUILD
+            if [ "$pkgverfinal" -ge "3" ]; then
+              sed -i "s/pkgver=.*/pkgver=${pkgverRepo}/" PKGBUILD
+              sed -i "s/kernelver=.*/kernelver=${kernelverRepo}/" PKGBUILD
+              sed -i "s/pkgrel=.*/pkgrel=${pkgrelRepo}/" PKGBUILD
+            else
+              cancel
+            fi
           else
-            echo "Sem atualiza de versão"
-            echo "SAINDO...."
-            false
+            cancel
           fi
 
       ## Tmate ##
