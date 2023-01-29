@@ -135,13 +135,23 @@ jobs:
       - name: Update Kernel Version
         shell: bash
         run: |
-          pkgver=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1)
-          kernelver=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f2 | sed 's/linux//')
-          pkgrel=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f2)
+          pkgverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1)
+          kernelverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f2 | sed 's/linux//')
+          pkgrelRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f2)
+          kVerRepo=${pkgverRepo}-${pkgrelRepo}
           
-          sed -i "s/pkgver=.*/pkgver=${pkgver}/" PKGBUILD
-          sed -i "s/kernelver=.*/kernelver=${kernelver}/" PKGBUILD
-          sed -i "s/pkgrel=.*/pkgrel=${pkgrel}/" PKGBUILD
+          source PKGBUILD
+          kVerBig=${pkgver}-${pkgrel}
+          
+          if [ "$kVerRepo" != "$kVerBig" ];then
+            sed -i "s/pkgver=.*/pkgver=${pkgverRepo}/" PKGBUILD
+            sed -i "s/kernelver=.*/kernelver=${kernelverRepo}/" PKGBUILD
+            sed -i "s/pkgrel=.*/pkgrel=${pkgrelRepo}/" PKGBUILD
+          else
+            echo "Sem atualiza de versão"
+            echo "SAINDO...."
+            false
+          fi
 
       ## Tmate ##
       #- name: Setup tmate session
