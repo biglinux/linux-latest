@@ -144,7 +144,7 @@ jobs:
           cancel () {
             echo "Sem atualiza de versão"
             echo "SAINDO...."
-            curl -H "Authorization: token ${{ secrets.WEBHOOK_TOKEN }}" \
+            curl -H "Authorization: token ${{ github.token }}" \
             -X POST "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
           }
           
