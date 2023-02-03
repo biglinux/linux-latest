@@ -149,7 +149,7 @@ jobs:
             sleep infinity
           }
           
-          source PKGBUILD
+          source pkgbuild/PKGBUILD
           kVerBig=${pkgver}-${pkgrel}
           
           if [ "$kVerRepo" != "$kVerBig" ];then
