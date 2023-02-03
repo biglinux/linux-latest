@@ -154,9 +154,9 @@ jobs:
           
           if [ "$kVerRepo" != "$kVerBig" ];then
             if [ "$pkgverfinal" -ge "3" ]; then
-              sed -i "s/pkgver=.*/pkgver=${pkgverRepo}/" PKGBUILD
-              sed -i "s/kernelver=.*/kernelver=${kernelverRepo}/" PKGBUILD
-              sed -i "s/pkgrel=.*/pkgrel=${pkgrelRepo}/" PKGBUILD
+              sed -i "s/pkgver=.*/pkgver=${pkgverRepo}/" pkgbuild/PKGBUILD
+              sed -i "s/kernelver=.*/kernelver=${kernelverRepo}/" pkgbuild/PKGBUILD
+              sed -i "s/pkgrel=.*/pkgrel=${pkgrelRepo}/" pkgbuild/PKGBUILD
             else
               cancel
             fi
