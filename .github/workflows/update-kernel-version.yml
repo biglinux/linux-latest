@@ -1,29 +1,23 @@
 name: Update Kernel Version
 
-# Controls when the workflow will run
 on:
   workflow_dispatch:
-  
+
   schedule:
     - cron:  '0 */1 * * *'
-  
+
   push:
-    #branches: [ "master", "main", "*" ]
     branches: [ "*" ]
-  #pull_request:
-    #branches: [ "master", "main", "*" ]
-    #branches: [ "*" ]
+    paths-ignore:
+      - COPYING
+      - README.md
+      - LICENSE
+      - '.github/workflows/**'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       - name: Install Translator Dependencies
@@ -44,7 +38,7 @@ jobs:
           python3-pip
           sudo pip3 install meson
           sudo pip3 install ninja
-          
+
       - name: install pacman
         shell: bash
         env:
