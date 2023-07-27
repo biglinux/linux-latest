@@ -124,10 +124,10 @@ jobs:
       - name: Update Kernel Version
         shell: bash
         run: |
-          pkgverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1)
-          pkgverfinal=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1 | rev | cut -d "." -f1 | rev)
-          kernelverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f2 | sed 's/linux//')
-          pkgrelRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f2)
+          pkgverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1)
+          pkgverfinal=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1 | rev | cut -d "." -f1 | rev)
+          kernelverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f2 | sed 's/linux//')
+          pkgrelRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f2)
           kVerRepo=${pkgverRepo}-${pkgrelRepo}
           
           cancel () {
