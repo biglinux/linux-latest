@@ -159,7 +159,7 @@ jobs:
 
       - name: Update github
         run: |
-          kVerRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers" | sort | tail -n1 | cut -d " " -f3)
+          kVerRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3)
           git config --local user.email "${{ secrets.GIT_USER }}@users.noreply.github.com"
           git config --local user.name "${{ secrets.GIT_USER }}"
           if [ -n "$(git commit -m "$kVerRepo" -a | grep "nothing to commit")" ];then exit 0; fi
