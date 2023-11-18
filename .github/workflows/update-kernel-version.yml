@@ -124,11 +124,16 @@ jobs:
       - name: Update Kernel Version
         shell: bash
         run: |
-          pkgverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1)
-          pkgverfinal=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1 | rev | cut -d "." -f1 | rev)
-          kernelverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f2 | sed 's/linux//')
-          pkgrelRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f2)
-          kVerRepo=${pkgverRepo}-${pkgrelRepo}
+          lastStable=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | awk '{print $3}' | sed 's/-.*//' | awk -F '.' '$NF > 3' | sort -Vr | head -1)
+          kernelVer=$(awk -F '.' '{print $1$2}' <<< $lastStable)
+          kernelRel=$(pacman -Sl | grep linux$kernelVer | grep core | grep -vE "rc|headers|rt" | awk -F '-' '{print $2}')
+          kVerRepo=${lastStable}-${kernelRel}
+          
+          # pkgverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1)
+          # pkgverfinal=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f1 | rev | cut -d "." -f1 | rev)
+          # kernelverRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f2 | sed 's/linux//')
+          # pkgrelRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | sort | tail -n1 | cut -d " " -f3 | cut -d "-" -f2)
+          # kVerRepo=${pkgverRepo}-${pkgrelRepo}
           
           cancel () {
             echo "Sem atualiza de versão"
@@ -142,16 +147,24 @@ jobs:
           kVerBig=${pkgver}-${pkgrel}
           
           if [ "$kVerRepo" != "$kVerBig" ];then
-            if [ "$pkgverfinal" -ge "3" ]; then
-              sed -i "s/pkgver=.*/pkgver=${pkgverRepo}/" PKGBUILD
-              sed -i "s/kernelver=.*/kernelver=${kernelverRepo}/" PKGBUILD
-              sed -i "s/pkgrel=.*/pkgrel=${pkgrelRepo}/" PKGBUILD
-            else
-              cancel
-            fi
+              sed -i "s/pkgver=.*/pkgver=${lastStable}/" PKGBUILD
+              sed -i "s/kernelver=.*/kernelver=${kernelVer}/" PKGBUILD
+              sed -i "s/pkgrel=.*/pkgrel=${kernelRel}/" PKGBUILD
           else
             cancel
           fi
+          
+          # if [ "$kVerRepo" != "$kVerBig" ];then
+          #   if [ "$pkgverfinal" -ge "3" ]; then
+          #     sed -i "s/pkgver=.*/pkgver=${pkgverRepo}/" PKGBUILD
+          #     sed -i "s/kernelver=.*/kernelver=${kernelverRepo}/" PKGBUILD
+          #     sed -i "s/pkgrel=.*/pkgrel=${pkgrelRepo}/" PKGBUILD
+          #   else
+          #     cancel
+          #   fi
+          # else
+          #   cancel
+          # fi
 
       ## Tmate ##
       #- name: Setup tmate session
