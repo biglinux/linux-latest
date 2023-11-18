@@ -120,6 +120,10 @@ jobs:
           sudo cp -r biglinux-key/usr/share/pacman/keyrings/* /etc/pacman.d/gnupg/
           sudo rm -r biglinux-key
           sudo pacman -Sy
+
+      # Tmate ##
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
           
       - name: Update Kernel Version
         shell: bash
@@ -165,10 +169,6 @@ jobs:
           # else
           #   cancel
           # fi
-
-      ## Tmate ##
-      #- name: Setup tmate session
-        #uses: mxschmitt/action-tmate@v3
 
       - name: Update github
         run: |
