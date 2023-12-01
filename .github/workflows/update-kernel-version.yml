@@ -128,7 +128,7 @@ jobs:
       - name: Update Kernel Version
         shell: bash
         run: |
-          lastStable=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | awk '{print $3}' | sed 's/-.*//' | awk -F '.' '$NF > 3' | sort -Vr | head -1)
+          lastStable=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | awk '{print $3}' | sed 's/-.*//' | awk -F '.' '$NF > 2' | sort -Vr | head -1)
           kernelVer=$(awk -F '.' '{print $1$2}' <<< $lastStable)
           kernelRel=$(pacman -Sl | grep linux$kernelVer | grep core | grep -vE "rc|headers|rt" | awk -F '-' '{print $2}')
           kVerRepo=${lastStable}-${kernelRel}
@@ -172,7 +172,7 @@ jobs:
 
       - name: Update github
         run: |
-          kVerRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | awk '{print $3}' | sed 's/-.*//' | awk -F '.' '$NF > 3' | sort -Vr | head -1)
+          kVerRepo=$(pacman -Sl | grep linux[0-9] | grep core | grep -vE "rc|headers|rt" | awk '{print $3}' | sed 's/-.*//' | awk -F '.' '$NF > 2' | sort -Vr | head -1)
           git config --local user.email "${{ secrets.GIT_USER }}@users.noreply.github.com"
           git config --local user.name "${{ secrets.GIT_USER }}"
           if [ -n "$(git commit -m "$kVerRepo" -a | grep "nothing to commit")" ];then exit 0; fi
