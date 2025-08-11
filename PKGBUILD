@@ -1,9 +1,9 @@
 # Maintainer: Barnabé di Kartola <barnabedikartola@gmail.com>
 
 pkgname=('linux-latest' 'linux-latest-acpi_call' 'linux-latest-bbswitch' 'linux-latest-broadcom-wl' 'linux-latest-nvidia' 'linux-latest-nvidia-390xx' 'linux-latest-nvidia-470xx' 'linux-latest-r8168' 'linux-latest-rtl8723bu' 'linux-latest-tp_smapi' 'linux-latest-vhba-module' 'linux-latest-virtualbox-host-modules' 'linux-latest-zfs')
-pkgver=6.15.7
-kernelver=615
-pkgrel=1
+pkgver=6.16.0
+kernelver=616
+pkgrel=5
 pkgdesc="Latest Kernel Version for BigLinux"
 arch=('any')
 url="https://github.com/biglinux/linux-latest"
