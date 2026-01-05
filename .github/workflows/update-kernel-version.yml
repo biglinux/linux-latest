@@ -77,7 +77,10 @@ jobs:
           Server = https://repo.biglinux.com.br/stable/$arch' | sudo tee -a /etc/pacman.conf
           
           #Mirrorlist
-          echo 'Server = https://mnvoip.mm.fcix.net/manjaro/stable/$repo/$arch' | sudo tee -a /etc/pacman.d/mirrorlist
+          # echo 'Server = https://mnvoip.mm.fcix.net/manjaro/stable/$repo/$arch' | sudo tee -a /etc/pacman.d/mirrorlist
+          echo 'Server = https://mirrors2.manjaro.org/stable/$repo/$arch' | sudo tee /etc/pacman.d/mirrorlist
+
+          sudo sed -i '/DownloadUser =/d' /etc/pacman.conf
       
       - name: install keyrings
         shell: bash
@@ -121,9 +124,9 @@ jobs:
           sudo rm -r biglinux-key
           sudo pacman -Sy
 
-      # Tmate ##
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # # Tmate ##
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
           
       - name: Update Kernel Version
         shell: bash
