@@ -3,7 +3,7 @@
 pkgname=('linux-latest' 'linux-latest-acpi_call' 'linux-latest-bbswitch' 'linux-latest-broadcom-wl' 'linux-latest-nvidia' 'linux-latest-nvidia-470xx' 'linux-latest-nvidia-570xx' 'linux-latest-nvidia-570xx-open' 'linux-latest-nvidia-nvidia-4575xx' 'linux-latest-nvidia-575xx-open' 'linux-latest-nvidia-open' 'linux-latest-r8168' 'linux-latest-rtl8723bu' 'linux-latest-tp_smapi' 'linux-latest-vhba-module' 'linux-latest-virtualbox-host-modules' 'linux-latest-zfs')
 pkgver=6.18.3
 kernelver=618
-pkgrel=2
+pkgrel=1
 pkgdesc="Latest Kernel Version for BigLinux"
 arch=('any')
 url="https://github.com/biglinux/linux-latest"
