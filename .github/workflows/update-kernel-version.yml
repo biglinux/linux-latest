@@ -1,4 +1,4 @@
-name: Update Kernel Version
+name: Update Kernel Version and Build Package
 
 on:
   workflow_dispatch:
