@@ -1,7 +1,7 @@
 # Maintainer: Barnabé di Kartola <barnabedikartola@gmail.com>
 
-pkgname=('linux-latest' 'linux-latest-acpi_call' 'linux-latest-bbswitch' 'linux-latest-broadcom-wl' 'linux-latest-nvidia' 'linux-latest-nvidia-470xx' 'linux-latest-nvidia-570xx' 'linux-latest-nvidia-570xx-open' 'linux-latest-nvidia-575xx' 'linux-latest-nvidia-575xx-open' 'linux-latest-nvidia-open' 'linux-latest-r8168' 'linux-latest-rtl8723bu' 'linux-latest-tp_smapi' 'linux-latest-vhba-module' 'linux-latest-virtualbox-host-modules' 'linux-latest-zfs')
-pkgver=7.0.3
+pkgname=('linux-latest' 'linux-latest-acpi_call' 'linux-latest-bbswitch' 'linux-latest-broadcom-wl' 'linux-latest-nvidia' 'linux-latest-nvidia-470xx' 'linux-latest-nvidia-570xx' 'linux-latest-nvidia-570xx-open' 'linux-latest-nvidia-580xx' 'linux-latest-nvidia-580xx-open' 'linux-latest-nvidia-open' 'linux-latest-r8168' 'linux-latest-rtl8723bu' 'linux-latest-tp_smapi' 'linux-latest-vhba-module' 'linux-latest-virtualbox-host-modules' 'linux-latest-zfs')
+pkgver=7.0.2
 kernelver=70
 pkgrel=1
 pkgdesc="Latest Kernel Version for BigLinux"
@@ -39,11 +39,11 @@ depends=("linux${kernelver}-nvidia-570xx")
 package_linux-latest-nvidia-570xx-open() {
 depends=("linux${kernelver}-nvidia-570xx-open")
 }
-package_linux-latest-nvidia-575xx() {
-depends=("linux${kernelver}-nvidia-575xx")
+package_linux-latest-nvidia-580xx() {
+depends=("linux${kernelver}-nvidia-580xx")
 }
-package_linux-latest-nvidia-575xx-open() {
-depends=("linux${kernelver}-nvidia-575xx-open")
+package_linux-latest-nvidia-580xx-open() {
+depends=("linux${kernelver}-nvidia-580xx-open")
 }
 package_linux-latest-nvidia-open() {
 depends=("linux${kernelver}-nvidia-open")
