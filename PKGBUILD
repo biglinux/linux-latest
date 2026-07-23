@@ -1,7 +1,7 @@
 # Maintainer: Barnabé di Kartola <barnabedikartola@gmail.com>
 
 pkgname=('linux-latest' 'linux-latest-acpi_call' 'linux-latest-bbswitch' 'linux-latest-broadcom-wl' 'linux-latest-nvidia' 'linux-latest-nvidia-470xx' 'linux-latest-nvidia-570xx' 'linux-latest-nvidia-570xx-open' 'linux-latest-nvidia-580xx' 'linux-latest-nvidia-580xx-open' 'linux-latest-nvidia-open' 'linux-latest-r8168' 'linux-latest-rtl8723bu' 'linux-latest-tp_smapi' 'linux-latest-vhba-module' 'linux-latest-virtualbox-host-modules' 'linux-latest-zfs')
-pkgver=7.1.3
+pkgver=7.1.4
 kernelver=71
 pkgrel=1
 pkgdesc="Latest Kernel Version for BigLinux"
