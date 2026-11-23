@@ -39,7 +39,10 @@ jobs:
         env:
           PACMAN_VERSION: 6.0.1
         run: |
-          sudo git clone --depth 1 https://gitlab.manjaro.org/packages/core/pacman.git
+          # sudo git clone --depth 1 https://gitlab.manjaro.org/packages/core/pacman.git
+          git clone https://code.manjaro.org/Ste74/PKGBUILDs.git
+          mv PKGBUILDs/core/pacman pacman
+          rm -rf PKGBUILDs
           pushd pacman
           sudo wget https://sources.archlinux.org/other/pacman/pacman-${PACMAN_VERSION}.tar.xz
           sudo tar -xvf pacman-${PACMAN_VERSION}.tar.xz
@@ -86,7 +89,10 @@ jobs:
         shell: bash
         run: |
           sudo install -dm755 /usr/share/pacman/keyrings/
-          sudo git clone --depth 1 https://gitlab.manjaro.org/packages/core/manjaro-keyring.git
+          # sudo git clone --depth 1 https://gitlab.manjaro.org/packages/core/manjaro-keyring.git
+          git clone https://code.manjaro.org/Ste74/PKGBUILDs.git
+          mv PKGBUILDs/core/manjaro-keyring manjaro-keyring
+          rm -rf PKGBUILDs
           pushd manjaro-keyring
             sudo install -m0644 manjaro.gpg /usr/share/pacman/keyrings/
             sudo install -m0644 manjaro-trusted /usr/share/pacman/keyrings/
